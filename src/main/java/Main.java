@@ -16,7 +16,7 @@ public class Main {
         service.getPhoneNumbersFromFile(file, PHONE_NUMBERS_REGEX);
         // second task
         UserService userService = new UserService();
-        List<String> users = userService.getUsersFromFile(JSON_FILE_INPUT_PATH);
+        List<User> users = userService.getUsersFromFile(JSON_FILE_INPUT_PATH);
         userService.usersToJson(users, JSON_FILE_OUTPUT_PATH);
         // third task
         WordsService wordsService = new WordsService();

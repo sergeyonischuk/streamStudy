@@ -5,19 +5,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class UserService {
 
-    public List<String> getUsersFromFile(String filepath) throws IOException {
-        List<String> usersList = Files.readAllLines(Paths.get(filepath));
-        usersList.removeAll(Arrays.asList("", null));
-        usersList.remove(usersList.get(0));
-        return usersList;
+    public List<User> getUsersFromFile(String filepath) throws IOException {
+        List<String> usersStringList = Files.readAllLines(Paths.get(filepath));
+        usersStringList.removeAll(Arrays.asList("", null));
+        usersStringList.remove(usersStringList.get(0));
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < usersStringList.size(); i++) {
+            String[] nameAndAge = usersStringList.get(0).split(" ");
+            users.add(new User(nameAndAge[0], Integer.parseInt(nameAndAge[1])));
+        }
+        return users;
     }
 
-    public void usersToJson(List<String> users, String outputFilePath) {
+    public void usersToJson(List<User> users, String outputFilePath) {
         String json = new Gson().toJson(users);
         File file = new File(outputFilePath);
         try (FileWriter writer = new FileWriter(file)) {
