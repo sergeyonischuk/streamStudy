@@ -16,8 +16,8 @@ public class UserService {
         usersStringList.removeAll(Arrays.asList("", null));
         usersStringList.remove(usersStringList.get(0));
         List<User> users = new ArrayList<>();
-        for (int i = 0; i < usersStringList.size(); i++) {
-            String[] nameAndAge = usersStringList.get(0).split(" ");
+        for (String s : usersStringList) {
+            String[] nameAndAge = s.split(" ");
             users.add(new User(nameAndAge[0], Integer.parseInt(nameAndAge[1])));
         }
         return users;
